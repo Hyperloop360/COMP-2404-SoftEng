@@ -5,7 +5,7 @@ using namespace std;
 #include "Book.h"
 
 void func1(Book);
-void func2(Book);
+void func2(Book &);
 
 int main() {
   cout << "Declaring and initializing books 1 to 4..." << endl;
@@ -49,4 +49,4 @@ int main() {
 
 void func1(Book b) { b.print(); }
 
-// void func2(Book &b) { b.print(); }
+void func2(Book &b) { b.print(); }
