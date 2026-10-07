@@ -11,10 +11,7 @@ using namespace std;
  * }
  */
 
-Date::Date(int d, int m, int y) {
-  cout << "in default constructor" << endl;
-  setDate(d, m, y);
-}
+Date::Date(int d, int m, int y) { setDate(d, m, y); }
 
 void Date::setDate(int d, int m, int y) {
   year = ((y > 0) ? y : 0);

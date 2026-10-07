@@ -1,15 +1,67 @@
-#include "defs.h"
 #include "Bank.h"
+#include "defs.h"
 
+int main() {
+  Bank myBank("Ottawa Trust Bank");
 
-int main()
-{
+  // Load initial customer and transaction data
+  loadCustomerData(myBank);
+  loadTransactionData(myBank);
 
+  int choice = -1;
+
+  while (choice != 0) {
+    printMenu(choice);
+
+    if (choice == 1) {
+      myBank.printCustomers();
+    } else if (choice == 2) {
+      int typeInput;
+      int acctId;
+      float amt;
+
+      cout << "Enter transaction type (0 for Debit, 1 for Credit): ";
+      cin >> typeInput;
+      while (typeInput != 0 && typeInput != 1) {
+        cout << "Invalid choice. Enter 0 for Debit, 1 for Credit: ";
+        cin >> typeInput;
+      }
+      TransactionType tType = (typeInput == 0) ? TR_DEBIT : TR_CREDIT;
+
+      cout << "Enter account ID: ";
+      cin >> acctId;
+      while (!myBank.containsAccount(acctId)) {
+        cout << "Account ID does not exist in the bank. Please enter a valid "
+                "account ID: ";
+        cin >> acctId;
+      }
+
+      cout << "Enter transaction amount: ";
+      cin >> amt;
+
+      int yr, mth, day;
+      currentDate(yr, mth, day);
+
+      if (myBank.addTransaction(tType, acctId, amt, yr, mth, day)) {
+        cout << "Transaction successfully added to pending list." << endl;
+      } else {
+        cout << "Error: Failed to add transaction." << endl;
+      }
+    } else if (choice == 3) {
+      myBank.processTransactions();
+      cout << "Pending transactions processed successfully." << endl;
+    } else if (choice == 4) {
+      cout << endl << "--- Pending Transactions ---" << endl;
+      myBank.printPendingTr();
+    } else if (choice == 5) {
+      cout << endl << "--- Logged Transactions ---" << endl;
+      myBank.printLoggedTr();
+    }
+  }
   return 0;
 }
 
-void printMenu(int& choice)
-{
+void printMenu(int &choice) {
   int c = -1;
   int numOptions = 5;
 
@@ -22,7 +74,7 @@ void printMenu(int& choice)
   cout << "  (0) Exit" << endl << endl;
 
   cout << "Please enter your selection: ";
-  cin  >> c;
+  cin >> c;
 
   if (c == 0) {
     choice = c;
@@ -31,15 +83,14 @@ void printMenu(int& choice)
 
   while (c < 0 || c > numOptions) {
     cout << "Please enter your selection: ";
-    cin  >> c;
+    cin >> c;
   }
 
   choice = c;
 }
 
-void loadCustomerData(Bank& currBank)
-{
-  int custId    = 1001;
+void loadCustomerData(Bank &currBank) {
+  int custId = 1001;
 
   currBank.addCustomer(custId++, "Bill");
   currBank.addCustomer(custId++, "Laura");
@@ -74,37 +125,33 @@ void loadCustomerData(Bank& currBank)
   currBank.addAccount(200139, 1008, 11.65f);
 }
 
-void loadTransactionData(Bank& currBank)
-{
-  currBank.addTransaction(TR_DEBIT,  200127,  50.00f, 2026, 9, 22);
-  currBank.addTransaction(TR_DEBIT,  200155, 150.00f, 2026, 9, 23);
-  currBank.addTransaction(TR_DEBIT,  200129, 250.00f, 2026, 9, 15);
-  currBank.addTransaction(TR_DEBIT,  200121, 100.00f, 2026, 9, 13);
-  currBank.addTransaction(TR_DEBIT,  200120,   5.00f, 2026, 9, 14);
-  currBank.addTransaction(TR_DEBIT,  200138,  43.88f, 2026, 9, 23);
-  currBank.addTransaction(TR_DEBIT,  200138, 245.98f, 2026,10,  1);
-  currBank.addTransaction(TR_DEBIT,  200139,  15.00f, 2026, 9, 19);
-  currBank.addTransaction(TR_DEBIT,  200133, 388.23f, 2026,10, 10);
-  currBank.addTransaction(TR_DEBIT,  200132, 100.00f, 2026,10,  3);
-  currBank.addTransaction(TR_DEBIT,  200130,   5.00f, 2026, 9, 21);
-  currBank.addTransaction(TR_DEBIT,  200130, -10.00f, 2026, 9, 30);
+void loadTransactionData(Bank &currBank) {
+  currBank.addTransaction(TR_DEBIT, 200127, 50.00f, 2026, 9, 22);
+  currBank.addTransaction(TR_DEBIT, 200155, 150.00f, 2026, 9, 23);
+  currBank.addTransaction(TR_DEBIT, 200129, 250.00f, 2026, 9, 15);
+  currBank.addTransaction(TR_DEBIT, 200121, 100.00f, 2026, 9, 13);
+  currBank.addTransaction(TR_DEBIT, 200120, 5.00f, 2026, 9, 14);
+  currBank.addTransaction(TR_DEBIT, 200138, 43.88f, 2026, 9, 23);
+  currBank.addTransaction(TR_DEBIT, 200138, 245.98f, 2026, 10, 1);
+  currBank.addTransaction(TR_DEBIT, 200139, 15.00f, 2026, 9, 19);
+  currBank.addTransaction(TR_DEBIT, 200133, 388.23f, 2026, 10, 10);
+  currBank.addTransaction(TR_DEBIT, 200132, 100.00f, 2026, 10, 3);
+  currBank.addTransaction(TR_DEBIT, 200130, 5.00f, 2026, 9, 21);
+  currBank.addTransaction(TR_DEBIT, 200130, -10.00f, 2026, 9, 30);
 
-  currBank.addTransaction(TR_CREDIT, 200122,  -8.99f, 2026, 9, 14);
-  currBank.addTransaction(TR_CREDIT, 200124,  88.79f, 2026, 9, 16);
-  currBank.addTransaction(TR_CREDIT, 200129,  88.79f, 2026,10, 24);
+  currBank.addTransaction(TR_CREDIT, 200122, -8.99f, 2026, 9, 14);
+  currBank.addTransaction(TR_CREDIT, 200124, 88.79f, 2026, 9, 16);
+  currBank.addTransaction(TR_CREDIT, 200129, 88.79f, 2026, 10, 24);
   currBank.addTransaction(TR_CREDIT, 200126, 223.12f, 2026, 9, 12);
-  currBank.addTransaction(TR_CREDIT, 200125, 786.09f, 2026,10,  5);
-  currBank.addTransaction(TR_CREDIT, 200125, 433.12f, 2026,10, 13);
+  currBank.addTransaction(TR_CREDIT, 200125, 786.09f, 2026, 10, 5);
+  currBank.addTransaction(TR_CREDIT, 200125, 433.12f, 2026, 10, 13);
 }
 
+void currentDate(int &year, int &month, int &day) {
+  time_t t = time(0);
+  tm *now = localtime(&t);
 
-void currentDate(int& year, int& month, int& day)
-{
-    time_t t = time(0); 
-    tm* now = localtime(&t);
-
-    year  = now->tm_year + 1900;
-    month = now->tm_mon + 1;
-    day   = now->tm_mday;
+  year = now->tm_year + 1900;
+  month = now->tm_mon + 1;
+  day = now->tm_mday;
 }
-
