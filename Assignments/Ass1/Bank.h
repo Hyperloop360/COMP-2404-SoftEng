@@ -7,6 +7,24 @@
 #include "defs.h"
 #include <string>
 
+/*
+ * Class: Bank
+ * Purpose: Manages the bank's name, collection of customers, collection of
+ *          pending transactions, and collection of logged transactions,
+ *          providing operations to add customers, accounts, and transactions,
+ *          process pending transactions in date order, and print reports.
+ * Members:
+ *   - name: string representing the bank name
+ *   - customers: primitive array of Customer objects
+ *   - numCustomers: integer tracking the number of customers
+ *   - pendingTransactions: primitive array of Transaction objects waiting to be
+ * processed
+ *   - numPendingTr: integer tracking the number of pending transactions
+ *   - loggedTransactions: primitive array of Transaction objects that have been
+ * processed
+ *   - numLoggedTr: integer tracking the number of logged transactions
+ */
+
 class Bank {
 public:
   Bank(string = "Bank");

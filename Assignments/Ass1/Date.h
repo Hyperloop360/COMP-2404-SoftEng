@@ -1,6 +1,18 @@
 #ifndef DATE_H
 #define DATE_H
 
+/*
+ * Class: Date
+ * Purpose: Represents a calendar date with year, month, and day,
+ *          and provides functionality to validate, print, and compare dates.
+ * Members:
+ *   - day: integer representing the day
+ *   - month: integer representing the month
+ *   - year: integer representing the year
+ *   - lastDayInMonth(int, int): helper function to get the last day of a month
+ *   - leapYear(int): helper function to check for a leap year
+ */
+
 class Date {
 public:
   // Date();
