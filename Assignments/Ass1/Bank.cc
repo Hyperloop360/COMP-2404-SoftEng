@@ -45,6 +45,7 @@ Customer &Bank::findCustomer(int custId) {
 
 bool Bank::addAccount(int acctId, int custId, float initBalance) {
   if (!containsCustomer(custId)) {
+    cout << "ERROR: customer " << custId << " not found" << endl;
     return false;
   }
   if (containsAccount(custId)) {
@@ -91,6 +92,7 @@ void Bank::addToTrArray(Transaction arr[], int &numTr, Transaction &newTr) {
 bool Bank::addTransaction(TransactionType t, int acctId, float amt, int yr,
                           int mth, int day) {
   if (!containsAccount(acctId)) {
+    cout << "ERROR: account " << acctId << " not found" << endl;
     return false;
   }
   Transaction newTr(t, acctId, amt, yr, mth, day);
