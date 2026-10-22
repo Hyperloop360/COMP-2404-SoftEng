@@ -1,0 +1,19 @@
+#include <iostream>
+using namespace std;
+#include <string>
+#include "Date.h"
+
+
+int main()
+{
+  Date d1(28, 1, 2013);
+  d1.print();
+
+  const Date newYear(1, 1);
+  newYear.print();
+//  newYear.setDate(2,2,2000);
+
+
+  cout<< endl << "End of program" << endl;
+  return 0;
+}
