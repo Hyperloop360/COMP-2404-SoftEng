@@ -16,8 +16,8 @@
 class Date {
 public:
   Date(int = 0, int = 0, int = 2000);
-  //void setDate(int, int, int);
- // bool lessThan(Date &d);
+  void setDate(int, int, int);
+  bool lessThan(Date &d);
   void print();
   bool greaterThan(Date *d);
   bool equals(Date *d);

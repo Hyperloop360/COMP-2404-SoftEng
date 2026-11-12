@@ -6,28 +6,28 @@ using namespace std;
 
 Date::Date(int d, int m, int y) { setDate(d, m, y); }
 
-// void Date::setDate(int d, int m, int y) {
-//   year = ((y > 0) ? y : 0);
-//   month = ((m > 0 && m <= 12) ? m : 0);
-//   day = ((d > 0 && d <= lastDayInMonth(m, y)) ? d : 0);
-// }
+void Date::setDate(int d, int m, int y) {
+  year = ((y > 0) ? y : 0);
+  month = ((m > 0 && m <= 12) ? m : 0);
+  day = ((d > 0 && d <= lastDayInMonth(m, y)) ? d : 0);
+}
 
-// bool Date::lessThan(Date &d) {
-//   if (year < d.year) {
-//     return true;
-//   }
-//   if (year > d.year) {
-//     return false;
-//   }
+bool Date::lessThan(Date &d) {
+  if (year < d.year) {
+    return true;
+  }
+  if (year > d.year) {
+    return false;
+  }
 
-//   if (month < d.month) {
-//     return true;
-//   }
-//   if (month > d.month) {
-//     return false;
-//   }
-//   return day < d.day;
-// }
+  if (month < d.month) {
+    return true;
+  }
+  if (month > d.month) {
+    return false;
+  }
+  return day < d.day;
+}
 
 bool Date::greaterThan(Date *d) {
   if (year > d->year) {
