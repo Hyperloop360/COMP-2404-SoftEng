@@ -1,0 +1,28 @@
+COMP 2404 A/B - Assignment #3
+Author:  Antony Punnassey 101336946
+
+Purpose:
+
+  Manages the text messages and subscribers of a telephone company (telco).
+  print all messages, all subscribers with their messages,
+  subscribers in descending order of message activity, and compute the
+  most frequent sending and receiving subscribers (Assignment #2 included as menu 4 and 5).
+
+Source files:
+  main.cc Control.cc View.cc Telco.cc SubArray.cc MsgList.cc Msg.cc
+  ExternMsg.cc InternMsg.cc Subscriber.cc Date.cc Time.cc
+Header files:
+  defs.h Control.h View.h Telco.h SubArray.h MsgList.h Msg.h ExternMsg.h
+  InternMsg.h Subscriber.h Date.h Time.h
+Other files:
+  Makefile README
+Data files: none
+
+Compiling:
+  make
+
+Launching (no command line arguments):
+  ./a3
+
+Cleaning:
+  make clean
